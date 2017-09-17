@@ -1,0 +1,140 @@
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <title>Ooer.com</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway|Special+Elite" rel="stylesheet">
+    <link rel="stylesheet" href="ooer.css">
+  </head>
+  <body class="desktop">
+    <canvas id="fx"></canvas>
+    <div class="ui">
+        <div class="deck">
+            <a href="/about" class="about double">
+                <h1>About Chris Neale</h1>
+                <div class="content">
+                    <p>This is my homepage! I'm a web developer/tinkerer who's been making websites and apps long enough to remember when "homepage" wasn't used ironically.</p>
+                    <p>There's a few bits and pieces around here, but chances are you're looking for Test The Web.</p>
+                </div>
+            </a>
+            <a href="http://twitter.com/onion2k/">
+                <h1>Twitter</h1>
+                <div class="content">
+                    <p>Read some tweets. I mostly retweet things about web tech.</p>
+                </div>
+            </a>
+            <a href="http://www.linkedin.com/cdneale">
+                <h1>cdneale</h1>
+                <div class="content">
+                    <p>Check out my LinkedIn profile.</p>
+                </div>
+            </a>
+        </div>
+        <div class="deck">
+            <a href="http://test.ooer.com/" class="double">
+                <h1>Test The Web</h1>
+                <div class="content">
+                    <p>I wrote a book about testing websites. It's Protractor oriented, but the ideas apply everywhere.</p>
+                    <p>TTW is an on-going work that will probably never be finished. Testing is hard..</p>
+                </div>
+                <span>Updated on 27/03/2017</span>
+            </a>
+            <a href="/lantern">
+                <h1>Lantern</h1>
+                <div class="content">
+                    <p>Lantern is a Chrome devtools test builder. Use it to build e2e tests easily.</p>
+                </div>
+                <span>Version 0.1.0</span>
+            </a>
+            <a href="http://github.com/onion2k">
+                <h1>Github</h1>
+                <div class="content">
+                    <p>My open source code.</p>
+                </div>
+            </a>
+        </div>
+        <div class="deck">
+            <a href="https://github.com/onion2k/clog">
+                <h1>Clog</h1>
+                <div class="content">
+                    <p>A commandline tool for turning git commit and merge messages in to a changelog.</p>
+                </div>
+                <span>Version 0.0.1</span>
+            </a>
+            <a href="/ui">
+                <h1>UI</h1>
+                <div class="content">
+                    <p>A menu UI.</p>
+                </div>
+            </a>
+            <a href="/arm">
+                <h1>Robot Arm</h1>
+                <div class="content">
+                    <p>A nodejs library to control the Maplin USB robotic arm.</p>
+                </div>
+            </a>
+            <a href="/blinkstick">
+                <h1>Blinkstick</h1>
+                <div class="content">
+                    <p>A Chrome app to control a Blinkstick LED array.</p>
+                </div>
+            </a>
+        </div>
+        <div class="deck">
+            <a href="http://library.ooer.com/">
+                <h1>Library</h1>
+                <div class="content">
+                    <p>My code snippet library.</p>
+                </div>
+            </a>
+            <a href="https://onion2k.github.io/console-image/">
+                <h1>Console Image</h1>
+                <div class="content">
+                    <p>Convert images to console.log() commands.</p>
+                </div>
+            </a>
+            <a href="/party">
+                <h1>Party</h1>
+                <div class="content">
+                    <p>A wesbite party button!</p>
+                </div>
+            </a>
+            <a href="/landscape">
+                <h1>Landscape</h1>
+                <div class="content">
+                    <p>A 'voxel' landscape that uses Perlin noise and WebGL cubes.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <script id="vs" type="x-shader/x-fragment">attribute vec4 position;
+void main() {
+    gl_Position = position;
+}</script>
+<script id="fs" type="x-shader/x-fragment">#extension GL_OES_standard_derivatives : enable
+#ifdef GL_ES
+precision mediump float;
+#endif
+
+uniform float time;
+uniform vec2 mouse;
+uniform vec2 resolution;
+const vec3 cola = vec3(254./255. , 204./255., 3./255.);
+const vec3 colb = vec3(126./255.,1./255.,0./255.);
+
+void main( void ) {
+
+    vec2 pos = ( gl_FragCoord.xy / resolution.xy );
+
+    pos.x += cos(pos.y*5.)*.2;
+    pos.y += cos(pos.y*5.0+time)*.2+sin(pos.x*10.0+time)*.2;
+
+    float color = clamp(-100.0+mod(pos.x+pos.y, .2)*1000.0, 0., 1.0);
+
+    gl_FragColor = vec4( mix(cola , colb , color), 1.0 );
+
+}
+</script>
+<script src="twgl.js"></script>
+<script defer src="ooer.js"></script>
+  </body>
+</html>
